@@ -95,7 +95,7 @@ class FaceTracker {
         if (navigator.mediaDevices.getUserMedia) {
             video = document.querySelector('#video');
             await navigator.mediaDevices.getUserMedia({
-                    video
+                    video : { facingMode : 'user' }
                 })
                 .then(function (stream) {
                     video.srcObject = stream;
