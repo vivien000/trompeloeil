@@ -1,0 +1,18 @@
+body {
+  /* remove margins and scroll bars */
+  margin: 0;
+  overflow: hidden;
+}
+
+#scene-container {
+  /* tell our scene container to take up the full page */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  /*
+    Set the container's background color to the same as the scene's
+    background to prevent flashing on load
+  */
+  background-color: #282828;
+}
