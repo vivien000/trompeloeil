@@ -10,9 +10,11 @@ const IRIS_SIZE = 0.0117;
 const NUM_KEYPOINTS = 468;
 const NUM_IRIS_KEYPOINTS = 5;
 const SMOOTHING = 0;
-const TOLERANCE = 0.01;
 
 const HALF_DIAGONAL = 0.2;
+
+const parameter2 = (location.search.split('blaze=')[1] || '').split('&')[0]
+const BLAZE = (parameter2.length > 0);
 
 let model, HFOV, VFOV;
 let canvas, video;
@@ -29,19 +31,29 @@ function fov(dfov, w, h) {
 }
 
 async function getLocation(ctx, width, height) {
-    const predictions = await model.estimateFaces({
-        input: ctx.getImageData(0, 0, width, height),
-        flipHorizontal: false
-    });
-
+    let predictions;
+    if (BLAZE) {
+        predictions = await model.estimateFaces(ctx.getImageData(0, 0, width, height), false);
+    } else {
+        predictions = await model.estimateFaces({
+            input: ctx.getImageData(0, 0, width, height),
+            predictIrises: (distanceMethod == 1),
+            flipHorizontal: false
+        });
+    }
+    let centerX, centerY, keypoints, foreheadX, foreheadY;
     if (predictions.length > 0) {
-        const keypoints = predictions[0].scaledMesh;
-        let centerX = keypoints[168][0];
-        let centerY = keypoints[168][1];
-
-        let foreheadX = keypoints[10][0];
-        let foreheadY = keypoints[10][1];
-
+        if (BLAZE) {
+            centerX = (predictions[0].landmarks[0][0] + predictions[0].landmarks[1][0])/2;
+            centerY = (predictions[0].landmarks[0][1] + predictions[0].landmarks[1][1])/2;
+        } else {
+            keypoints = predictions[0].scaledMesh;
+            centerX = keypoints[168][0];
+            centerY = keypoints[168][1];
+    
+            foreheadX = keypoints[10][0];
+            foreheadY = keypoints[10][1];
+        }
         let d;
         if (distanceMethod == 0) {
             d = DEFAULT_DISTANCE;
@@ -67,8 +79,8 @@ async function getLocation(ctx, width, height) {
             }
             d = IRIS_SIZE * FOCAL_LENGTH * canvas.width / MAX_WIDTH / diameter;
         }
-        return [Math.atan((centerX - canvas.width / 2) / canvas.width * Math.tan(HFOV)),
-            Math.atan((centerY - canvas.height / 2) / canvas.height * Math.tan(VFOV)),
+        return [Math.atan(2 * (centerX - width / 2) / width * Math.tan(HFOV / 2)),
+            Math.atan(2 * (centerY - height / 2) / height * Math.tan(VFOV / 2)),
             d
         ]
 
@@ -81,17 +93,21 @@ class FaceTracker {
         this.angle1 = 0;
         this.angle2 = 0;
         this.distance = 0;
-        this.deltaD = 0;
         this.step = 1;
         this.lastTimestamp = Date.now();
     }
 
     async init() {
         await tf.setBackend('webgl');
-        model = await faceLandmarksDetection.load(
-            faceLandmarksDetection.SupportedPackages.mediapipeFacemesh, {
-                maxFaces: 1
-            });
+        if (BLAZE) {
+            model = await blazeface.load();
+        } else {
+            model = await faceLandmarksDetection.load(
+                faceLandmarksDetection.SupportedPackages.mediapipeFacemesh, {
+                    shouldLoadIrisModel: (distanceMethod > 0),
+                    maxFaces: 1
+                });
+        }
         if (navigator.mediaDevices.getUserMedia) {
             video = document.querySelector('#video');
             await navigator.mediaDevices.getUserMedia({
@@ -122,29 +138,18 @@ class FaceTracker {
             const [angle1, angle2, distance] = result;
             this.angle1 = angle1;
             this.angle2 = angle2;
-            let correctedDistance;
-            if (this.step == 1) {
-                correctedDistance = distance;
-            } else if (distance - this.distance > this.deltaD + TOLERANCE) {
-                correctedDistance = this.distance + this.deltaD + TOLERANCE;
-            } else if (distance - this.distance < this.deltaD - TOLERANCE) {
-                correctedDistance = this.distance + this.deltaD - TOLERANCE;
-            } else {
-                correctedDistance = distance;
-            }
-            this.distance = (1 - SMOOTHING) * correctedDistance + SMOOTHING * this.distance;
+            this.distance = (1 - SMOOTHING) * distance + SMOOTHING * this.distance;
             if (this.step <= 10) {
                 this.distance = this.distance / (1 - Math.pow(SMOOTHING, this.step))
             }
-            this.deltaD = correctedDistance - this.distance;
             this.lastTimestamp = Date.now();
             this.step = this.step + 1;
         } else {
             return null;
         }
         let d = this.distance;
-        const tan1 = -Math.tan(this.angle1 / 2);
-        const tan2 = -Math.tan(this.angle2 / 2);
+        const tan1 = -Math.tan(this.angle1);
+        const tan2 = -Math.tan(this.angle2);
         const z = Math.sqrt(d * d / (1 + tan1 * tan1 + tan2 * tan2))
         const cameraPosition = [z * tan1, z * tan2, z];
         const fov = 180 / Math.PI * 2 * Math.atan(HALF_DIAGONAL / d);
