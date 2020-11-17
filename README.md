@@ -1,6 +1,6 @@
 # Simulating depth perception with face tracking
 
-[Motion parallax](https://en.wikipedia.org/wiki/Depth_perception#Monocular_cues) is created by the apparent relative motion of objects when an observer moves. It is one of the monocular cues that enables depth perception. This [demo](https://vivien000.github.io/trompeloeil/) simulates this phenomenon thanks to [TensorFlow.js](https://www.tensorflow.org/js/models) and [three.js](https://threejs.org/).
+[Motion parallax](https://en.wikipedia.org/wiki/Depth_perception#Monocular_cues) is created by the apparent relative motion of objects when an observer moves. It's one of the monocular cues that enables depth perception. This [demo](https://vivien000.github.io/trompeloeil/) simulates this phenomenon thanks to [TensorFlow.js](https://www.tensorflow.org/js/models) and [three.js](https://threejs.org/).
 
 ![Screenshot](screenshot.gif "Screenshot")
 
@@ -26,7 +26,9 @@ Besides, it'd be more efficient to compute the predictions in a web worker. Unfo
 
 ## Acknowledgements
 
-Thanks to Google, the TensorFlow.JS community and the three.JS community for making available such great libraries. I used [Discover three.js](https://discoverthreejs.com/), a great interactive book by [Lewy Blue](https://twitter.com/lewy_blue), to get started with three.js. Thanks also to my friend Fabien for his feedback.
+I was inspired by this [old demo](https://youtu.be/Jd3-eiid-Uw) (2007!) by [Johnny Lee](https://twitter.com/johnnychunglee).
+
+Thanks to Google, the TensorFlow.JS community and the three.JS community for making available such cool libraries. I used [Discover three.js](https://discoverthreejs.com/), a great interactive book by [Lewy Blue](https://twitter.com/lewy_blue), to get started with three.js. Thanks also to my friend Fabien for his feedback.
 
 Credits for the 3D models:
 - [Tie Interceptor](https://skfb.ly/6oZzr) by [StarWars-Universe](https://sketchfab.com/SWU)
