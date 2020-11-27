@@ -1,6 +1,6 @@
 # Simulating depth perception with face tracking
 
-[Motion parallax](https://en.wikipedia.org/wiki/Depth_perception#Monocular_cues) is created by the apparent relative motion of objects when an observer moves. It's one of the monocular cues that enables depth perception. This [demo](https://vivien000.github.io/trompeloeil/) simulates this phenomenon thanks to [TensorFlow.js](https://www.tensorflow.org/js/models) and [three.js](https://threejs.org/).
+[Motion parallax](https://en.wikipedia.org/wiki/Depth_perception#Monocular_cues) is created by the apparent relative motion of objects when an observer moves. It's one of the monocular cues that enable depth perception. This [demo](https://vivien000.github.io/trompeloeil/) simulates this phenomenon thanks to [TensorFlow.js](https://www.tensorflow.org/js/models) and [three.js](https://threejs.org/).
 
 ![Screenshot](screenshot.gif "Screenshot")
 
@@ -16,7 +16,7 @@ The resulting image is very stable, which suggests that the model's predictions 
 
 ## Detecting the distance between the face and the camera
 
-The Face Landmarks Detection model also optionally predicts the location and shape of the irises. Since the human iris' size is [remarkably constant](https://google.github.io/mediapipe/solutions/iris#depth-from-iris), we can then estimate the distance between the camera and the eyes if we know the webcam's focal length. This distance should be taken into account to determine the field of view of the three.js camera. However, this estimate is too noisy and I didn't use it (but you can still see that by yourself with *[?distanceMethod=1](https://vivien000.github.io/trompeloeil/?distanceMethod=1)*). I also [tried](https://vivien000.github.io/trompeloeil/?distanceMethod=2) to use the distance between the facial landmark between the two eyes and one on the forehead (such distance should be globally invariant to facial expressions and left/right rotations of the head). This was a bit more stable but still unsatisfying. At the end of the day, I assumed that the distance of the observer's face and the camera is constant.
+The Face Landmarks Detection model also optionally predicts the location and shape of the irises. Since the human iris' size is [remarkably constant](https://google.github.io/mediapipe/solutions/iris#depth-from-iris), we can then estimate the distance between the camera and the eyes if we know the webcam's focal length. This distance should be taken into account to determine the field of view of the three.js camera. However, this estimate is too noisy and I didn't use it (but you can still see that by yourself with *[?distanceMethod=1](https://vivien000.github.io/trompeloeil/?distanceMethod=1)*). I also [tried](https://vivien000.github.io/trompeloeil/?distanceMethod=2) to use the distance between the facial landmark between the two eyes and one on the forehead (such distance should be globally invariant to facial expressions and left/right rotations of the head). This was a bit more stable but still unsatisfying. At the end of the day, I assumed that the distance between the observer's face and the camera is constant.
 
 ## Limitations
 
