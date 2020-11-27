@@ -94,7 +94,6 @@ class FaceTracker {
         this.angle2 = 0;
         this.distance = 0;
         this.step = 1;
-        this.lastTimestamp = Date.now();
     }
 
     async init() {
@@ -142,7 +141,6 @@ class FaceTracker {
             if (this.step <= 10) {
                 this.distance = this.distance / (1 - Math.pow(SMOOTHING, this.step))
             }
-            this.lastTimestamp = Date.now();
             this.step = this.step + 1;
         } else {
             return null;
