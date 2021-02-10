@@ -6,7 +6,7 @@
 
 ## Usage
 
-Just launch the [demo](https://vivien000.github.io/trompeloeil/) with Chrome, Firefox or Edge on your webcam-equipped laptop or desktop and wait a little. You can add *[?object=1](https://vivien000.github.io/trompeloeil/?object=1)* or *[?object=2](https://vivien000.github.io/trompeloeil/?object=2)* at the end of the URL to try other 3D models.
+Just launch the [demo](https://vivien000.github.io/trompeloeil/) with Chrome, Firefox or Edge on your webcam-equipped laptop or desktop and wait a little. You can use the drop-down list or add *[?object=1](https://vivien000.github.io/trompeloeil/?object=1)* or *[?object=2](https://vivien000.github.io/trompeloeil/?object=2)* at the end of the URL to try other 3D models.
 
 ## Detecting the orientation of the camera/face axis
 
@@ -20,7 +20,9 @@ The Face Landmarks Detection model also optionally predicts the location and sha
 
 ## Limitations
 
-Theoretically, I shouldn't just position the three.js camera where the observer's face was detected. I should also warp the resulting image to account for the fact that the camera plane and the screen's plane aren't parallel. I didn't do it but I don't think it makes a big difference given the relatively narrow field of view of most webcams.
+All this can only work for one observer since the screen can only display one picture at a time.
+
+Moreover, I should theoretically not just position the three.js camera where the observer's face was detected. I should also warp the resulting image to account for the fact that the camera plane and the screen's plane aren't parallel. I didn't do it but I don't think it makes a big difference given the relatively narrow field of view of most webcams.
 
 Besides, it'd be more efficient to compute the predictions in a web worker. Unfortunately enough, I understand it's only possible to use TensorFlow.js and WebGL in a worker when OffscreenCanvas is available, which is currently not the case for some browsers, e.g. [Firefox](https://caniuse.com/offscreencanvas).
 
