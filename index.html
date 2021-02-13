@@ -25,16 +25,18 @@
   <div id="scene-container">
     <!-- Our <canvas> will be inserted here -->
   </div>
-  <div id="video-container" style="visibility: hidden; z-index: 0;">
-    <video autoplay="true" id="video">
-    </video>
-  </div>
-  <div style="z-index: 1; position:absolute; top:0; right: 0; margin: 20px;">
-    <select id="object">
-      <option value="0">Spaceship</option>
-      <option value="1">Parrot</option>
-      <option value="2">Van Gogh</option>
-    </select>
+  <div id="controls" style="visibility:hidden">
+    <div id="video-container" style="position:absolute; left:0; bottom:0;">
+      <video autoplay="true" style="width:200px; margin:10px;" id="video">
+      </video>
+    </div>
+    <div style="z-index: 1; position:absolute; top:0; right: 0; margin: 20px;">
+      <select id="object">
+        <option value="0">Spaceship</option>
+        <option value="1">Parrot</option>
+        <option value="2">Van Gogh</option>
+      </select>
+    </div>
   </div>
 </body>
 
