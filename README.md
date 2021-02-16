@@ -33,6 +33,6 @@ I was inspired by this [old demo](https://youtu.be/Jd3-eiid-Uw) (2007!) from [Jo
 Thanks to Google, the TensorFlow.JS community and the three.JS community for making available such cool libraries. I used [Discover three.js](https://discoverthreejs.com/), a great interactive book by [Lewy Blue](https://twitter.com/lewy_blue), to get started with three.js. Thanks also to my friend Fabien for his feedback.
 
 Credits for the 3D models:
-- [Tie Interceptor](https://skfb.ly/6oZzr) by [StarWars-Universe](https://sketchfab.com/SWU)
-- [Parrot](https://github.com/mrdoob/three.js/tree/dev/examples/models/gltf) by [three.js](https://threejs.org/)
-- [Van Gogh 3D](https://sketchfab.com/3d-models/van-gogh-3d-be055097ec1942269450952a3983098d) by [federico.lorenzin](https://sketchfab.com/federico.lorenzin)
+- [Tie Interceptor](https://skfb.ly/6oZzr) by [StarWars-Universe](https://sketchfab.com/SWU) shared under a [CC Attribution-NonCommercial-ShareAlike](http://creativecommons.org/licenses/by-nc-sa/4.0/) license
+- [Parrot](https://github.com/mrdoob/three.js/tree/dev/examples/models/gltf) by [three.js](https://threejs.org/) shared under the [MIT license](https://github.com/mrdoob/three.js/blob/dev/LICENSE)
+- [Van Gogh 3D](https://sketchfab.com/3d-models/van-gogh-3d-be055097ec1942269450952a3983098d) by [federico.lorenzin](https://sketchfab.com/federico.lorenzin) shared under a [CC Attribution](https://creativecommons.org/licenses/by/4.0/) license
