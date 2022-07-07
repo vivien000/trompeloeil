@@ -32,6 +32,10 @@ I was inspired by this [old demo](https://youtu.be/Jd3-eiid-Uw) (2007!) from [Jo
 
 Thanks to Google, the TensorFlow.JS community and the three.JS community for making available such cool libraries. I used [Discover three.js](https://discoverthreejs.com/), a great interactive book by [Lewy Blue](https://twitter.com/lewy_blue), to get started with three.js. Thanks also to my friend Fabien for his feedback.
 
+I’m grateful to Jason Mayes and the TensorFlow Team for having selected this project as a [Tensorflow Community Spotlight winner](https://twitter.com/TensorFlow/status/1347679140468543491).
+
+![TensorFlow Community Spotlight](spotlight.png)
+
 Credits for the 3D models:
 - [Tie Interceptor](https://skfb.ly/6oZzr) by [StarWars-Universe](https://sketchfab.com/SWU) shared under a [CC Attribution-NonCommercial-ShareAlike](http://creativecommons.org/licenses/by-nc-sa/4.0/) license
 - [Parrot](https://github.com/mrdoob/three.js/tree/dev/examples/models/gltf) by [three.js](https://threejs.org/) shared under the [MIT license](https://github.com/mrdoob/three.js/blob/dev/LICENSE)
